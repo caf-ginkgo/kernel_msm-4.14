@@ -7451,8 +7451,8 @@ static inline bool task_fits_capacity(struct task_struct *p,
 		margin = schedtune_task_boost(p) > 0 &&
 			  !schedtune_prefer_high_cap(p) &&
 			   p->prio <= DEFAULT_PRIO ?
-			sched_capacity_margin_down_boosted[task_cpu(p)] :
-			sched_capacity_margin_down[task_cpu(p)];
+			sched_capacity_margin_down_boosted[cpu] :
+			sched_capacity_margin_down[cpu];
 	else
 		margin = schedtune_task_boost(p) > 0 &&
 			  !schedtune_prefer_high_cap(p) &&
