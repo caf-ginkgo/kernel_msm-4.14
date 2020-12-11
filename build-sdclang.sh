@@ -1,7 +1,8 @@
-export PATH="$HOME/bsp/LA.QSSI/LINUX/android/vendor/qcom/proprietary/llvm-arm-toolchain-ship/10.0/bin:$PATH"
-GCCPATH="$HOME/bsp/LA.QSSI/LINUX/android/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin"
+export PATH="$HOME/caf/vendor/qcom/proprietary/llvm-arm-toolchain-ship/10.0/bin:$PATH"
+GCCPATH="$HOME/caf/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin"
+GCCPATH_32="$HOME/caf/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9/bin"
 SECONDS=0
-ZIPNAME="QuicksilveRV2-ginkgo-$(date '+%Y%m%d-%H%M').zip"
+ZIPNAME="QuicksilveRV2-ginkgo-$(date '+%Y%m%d-%H%M')-sdclang.zip"
 
 mkdir -p out
 make O=out ARCH=arm64 vendor/ginkgo-perf_defconfig
@@ -12,7 +13,7 @@ echo -e "\nRegened defconfig succesfully!"
 exit 0
 else
 echo -e "\nStarting compilation...\n"
-make -j$(nproc --all) O=out ARCH=arm64 CC=clang LD=ld.lld AR=llvm-ar NM=llvm-nm OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip CLANG_TRIPLE=aarch64-linux-gnu- CROSS_COMPILE=$GCCPATH/aarch64-linux-androidkernel- Image.gz-dtb dtbo.img
+make -j$(nproc --all) O=out ARCH=arm64 CC=clang LD=ld.lld AR=llvm-ar NM=llvm-nm OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip CLANG_TRIPLE=aarch64-linux-gnu- CROSS_COMPILE=$GCCPATH/aarch64-linux-androidkernel- CROSS_COMPILE_ARM32=$GCCPATH_32/arm-linux-androidkernel- Image.gz-dtb dtbo.img
 fi
 
 if [ -f "out/arch/arm64/boot/Image.gz-dtb" ] && [ -f "out/arch/arm64/boot/dtbo.img" ]; then
