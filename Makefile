@@ -376,7 +376,7 @@ endif
 
 # Make variables (CC, etc...)
 CC		= clang
-CC_DIR		= $(shell echo $(CC) | sed 's/\(.*\)\/.*/\1\//')
+CC_DIR		= $(shell echo $(dir $(CC)) | sed 's/\.\///')
 AS              = $(CROSS_COMPILE)as
 LD              = $(CC_DIR)ld.lld
 ld-name		= lld
