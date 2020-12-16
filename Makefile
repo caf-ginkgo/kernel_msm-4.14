@@ -376,7 +376,7 @@ endif
 
 # Make variables (CC, etc...)
 CC		= clang
-CC_DIR		= $(shell echo $(dir $(CC)) | sed 's/\.\///')
+CC_DIR		= $(shell if echo $(CC) | grep -q "ccache"; then echo; else echo $(dir $(CC)) | sed 's/\.\///'; fi)
 AS              = $(CROSS_COMPILE)as
 LD              = $(CC_DIR)ld.lld
 ld-name		= lld
